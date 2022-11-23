@@ -1,17 +1,17 @@
 import Id from '../../../@shared/domain/value-object/id.value-object'
-import Product from '../../domain/product.entity'
-import ProductGateway from '../../gateway/product.gateway'
+import ProductEntity from '../../domain/product.entity'
+import ProductGatewayInterface from '../../gateway/product.gateway.interface'
 import { InputAddProduct, OutputAddProduct } from './add-product.usecase.dto'
 
 export default class AddProductUseCase {
-  private readonly _productRepository: ProductGateway
+  private readonly _productRepository: ProductGatewayInterface
   
-  constructor(productRepository: ProductGateway) {
+  constructor(productRepository: ProductGatewayInterface) {
     this._productRepository = productRepository
   }
 
   async execute(input: InputAddProduct): Promise<OutputAddProduct> {
-    const product = new Product({
+    const product = new ProductEntity({
       id: new Id(input.id),
       name: input.name,
       description: input.description,

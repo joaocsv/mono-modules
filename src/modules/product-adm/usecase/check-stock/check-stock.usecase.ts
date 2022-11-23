@@ -1,11 +1,11 @@
 import UseCaseInterface from '../../../@shared/usecase/usecase.interface'
-import ProductGateway from '../../gateway/product.gateway'
+import ProductGatewayInterface from '../../gateway/product.gateway.interface'
 import { InputCheckStock, OutputCheckStock } from './check-stock.usecase.dto'
 
 export default class CheckStockUseCase implements UseCaseInterface{
-  private productRepository: ProductGateway
+  private productRepository: ProductGatewayInterface
 
-  constructor (productRepository: ProductGateway) {
+  constructor (productRepository: ProductGatewayInterface) {
     this.productRepository = productRepository
   }
 

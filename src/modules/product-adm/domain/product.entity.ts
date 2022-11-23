@@ -2,7 +2,7 @@ import AggregateRootInterface from '../../@shared/domain/entity/aggregate-root.i
 import BaseEntity from '../../@shared/domain/entity/base.entity'
 import Id from '../../@shared/domain/value-object/id.value-object'
 
-type ProductProps = {
+type ProductProperties = {
   id: Id
   name: string
   description: string
@@ -10,19 +10,19 @@ type ProductProps = {
   stock: number
 }
 
-export default class Product extends BaseEntity implements AggregateRootInterface {
+export default class ProductEntity extends BaseEntity implements AggregateRootInterface {
   private _name: string
   private _description: string
   private _purchasePrice: number
   private _stock: number
 
-  constructor(props: ProductProps) {
-    super(props.id)
+  constructor(properties: ProductProperties) {
+    super(properties.id)
 
-    this._name = props.name
-    this._description = props.description
-    this._purchasePrice = props.purchasePrice
-    this._stock = props.stock
+    this._name = properties.name
+    this._description = properties.description
+    this._purchasePrice = properties.purchasePrice
+    this._stock = properties.stock
   }
 
   get name (): string {

@@ -1,14 +1,14 @@
 import Id from '../../@shared/domain/value-object/id.value-object'
-import Product from '../domain/product.entity'
 import ProductEntity from '../domain/product.entity'
-import ProductGateway from '../gateway/product.gateway'
+import ProductEntity from '../domain/product.entity'
+import ProductGatewayInterface from '../gateway/product.gateway.interface'
 import ProductModel from './product.model'
 
-export default class ProductRepository implements ProductGateway {
+export default class ProductRepository implements ProductGatewayInterface {
   async find(id: string): Promise<ProductEntity> {
     const product = await ProductModel.findOne({ where: { id } })
     
-    return new Product({
+    return new ProductEntity({
       id: new Id(product.id),
       name: product.name,
       description: product.description,

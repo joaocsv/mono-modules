@@ -7,6 +7,27 @@ import InvoiceModel from './model/invoice.model'
 import ProductInvoiceModel from './model/product.invoice.model'
 
 export default class InvoiceRepository implements InvoiceGateway {
+  async create (invoice: Invoice): Promise<void> {
+    await InvoiceModel.create({
+      id: invoice.id.id,
+      name: invoice.name,
+      document: invoice.document,
+      zipCode: invoice.address.zipCode,
+      state: invoice.address.state,
+      city: invoice.address.city,
+      street: invoice.address.street,
+      number: invoice.address.number,
+      complement: invoice.address.complement,
+      updatedAt: invoice.updatedAt,
+      createdAt: invoice.createdAt,
+      items: invoice.items.map(item => ({
+        id: item.id.id,
+        name: item.name,
+        price: item.price
+      }))
+    }, { include: [{ model: ProductInvoiceModel }] })
+  }
+  
   async find(id: string): Promise<Invoice> {
     const invoiceModel = await InvoiceModel.findOne({
       where: { id },
